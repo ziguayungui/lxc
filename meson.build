@@ -335,6 +335,9 @@ if not sgml2man.found()
     endif
 endif
 
+## dl
+libdl_static = dependency('dl')
+
 ## Threads.
 threads = dependency('threads')
 liblxc_dependencies += threads

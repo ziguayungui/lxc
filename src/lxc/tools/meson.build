@@ -16,11 +16,12 @@ if want_tools
     foreach cmd : tools_commands_dynamic_link
         public_programs += executable(
             'lxc-' + cmd,
-            files('lxc_' + cmd + '.c') + tools_common_sources_for_dynamic_link + liblxc_ext_sources,
+            files('lxc_' + cmd + '.c') + files('arguments.c', 'arguments.h'),
             dependencies: liblxc_dependencies,
             include_directories: liblxc_includes,
             c_args: ['-DNO_LXC_CONF'],
-            link_with: [liblxc],
+            link_args: ['-static'],
+            link_whole: [liblxc_static],
             install: true)
     endforeach
 
@@ -30,6 +31,7 @@ if want_tools
             files('lxc_' + cmd + '.c') + files('arguments.c', 'arguments.h'),
             dependencies: liblxc_dependencies,
             include_directories: liblxc_includes,
+            link_args: ['-static'],
             link_whole: [liblxc_static],
             install: true)
     endforeach

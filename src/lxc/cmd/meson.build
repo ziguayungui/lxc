@@ -77,10 +77,12 @@ endif
 
 cmd_programs += executable(
     'init.lxc',
-    cmd_lxc_init_sources,
+    files('lxc_init.c'),
     include_directories: liblxc_includes,
     c_args: ['-DNO_LXC_CONF'],
-    dependencies: liblxc_dep,
+    link_args: ['-static'],
+    dependencies: liblxc_dependencies,
+    link_whole: [liblxc_static],
     install_dir: sbindir,
     install: true)
 
@@ -88,6 +90,7 @@ cmd_programs += executable(
     'lxc-monitord',
     cmd_lxc_monitord_sources,
     include_directories: liblxc_includes,
+    link_args: ['-static'],
     dependencies: liblxc_dependencies,
     link_whole: [liblxc_static],
     install: true,
@@ -95,16 +98,20 @@ cmd_programs += executable(
 
 cmd_programs += executable(
     'lxc-user-nic',
-    cmd_lxc_user_nic_sources,
+    files('lxc_user_nic.c'),
     include_directories: liblxc_includes,
-    dependencies: liblxc_dep,
+    link_args: ['-static'],
+    dependencies: liblxc_dependencies,
+    link_whole: [liblxc_static],
     install: true,
     install_mode: 'rwsr-xr-x', # 4755
     install_dir: lxclibexec)
 
 cmd_programs += executable(
     'lxc-usernsexec',
-    cmd_lxc_usernsexec_sources,
+    files('lxc_usernsexec.c'),
     include_directories: liblxc_includes,
-    dependencies: liblxc_dep,
+    link_args: ['-static'],
+    dependencies: liblxc_dependencies,
+    link_whole: [liblxc_static],
     install: true)
