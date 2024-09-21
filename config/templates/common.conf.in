@@ -10,7 +10,7 @@ lxc.pty.max = 1024
 lxc.tty.max = 4
 
 # Drop some harmful capabilities
-lxc.cap.drop = mac_admin mac_override sys_time sys_module sys_rawio
+# lxc.cap.drop = mac_admin mac_override sys_time sys_module sys_rawio
 
 # Ensure hostname is changed on clone
 lxc.hook.clone = @LXCHOOKDIR@/clonehostname
@@ -79,7 +79,7 @@ lxc.mount.entry = /sys/fs/fuse/connections sys/fs/fuse/connections none bind,opt
 
 # Block some syscalls which are not safe in privileged
 # containers
-lxc.seccomp.profile = @LXCTEMPLATECONFIG@/common.seccomp
+# lxc.seccomp.profile = @LXCTEMPLATECONFIG@/common.seccomp
 
 # Lastly, include all the configs from @LXCTEMPLATECONFIG@/common.conf.d/
 lxc.include = @LXCTEMPLATECONFIG@/common.conf.d/
